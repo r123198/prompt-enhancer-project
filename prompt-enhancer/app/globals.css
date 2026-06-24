@@ -1,0 +1,719 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;450;600&display=swap');
+@import "tailwindcss";
+
+/* ─── Design Tokens (Vibe Logic from Stitch) ─────────────────────────────── */
+
+:root {
+  /* Surface palette */
+  --surface: #0b1326;
+  --surface-dim: #0b1326;
+  --surface-bright: #31394d;
+  --surface-container-lowest: #060e20;
+  --surface-container-low: #131b2e;
+  --surface-container: #171f33;
+  --surface-container-high: #222a3d;
+  --surface-container-highest: #2d3449;
+
+  /* On-surface */
+  --on-surface: #dae2fd;
+  --on-surface-variant: #cdc2d7;
+
+  /* Primary (Electric Purple) */
+  --primary: #d6baff;
+  --primary-container: #aa73ff;
+  --on-primary: #430089;
+  --on-primary-container: #3a0079;
+
+  /* Secondary (Cyan Beam) */
+  --secondary: #e6feff;
+  --secondary-container: #00f4fe;
+  --secondary-fixed: #63f7ff;
+
+  /* Outline */
+  --outline: #968da0;
+  --outline-variant: #4b4454;
+
+  /* Error */
+  --error: #ffb4ab;
+  --error-container: #93000a;
+
+  /* Inverse */
+  --inverse-surface: #dae2fd;
+  --inverse-on-surface: #283044;
+
+  /* Typography */
+  --font-sans: 'Hanken Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+  --space-unit: 4px;
+  --container-max: 1200px;
+
+  /* Radii */
+  --radius-sm: 0.25rem;
+  --radius-default: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Tailwind overrides */
+  --background: var(--surface);
+  --foreground: var(--on-surface);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+/* ─── Base Styles ────────────────────────────────────────────────────────── */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+
+/* ─── Typography Classes ─────────────────────────────────────────────────── */
+
+.text-headline-lg {
+  font-family: var(--font-sans);
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.text-headline-md {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.text-headline-sm {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.text-body-lg {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+.text-body-md {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.text-code-md {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 450;
+}
+
+.text-label-caps {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ─── Responsive Headline ────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .text-headline-lg {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
+/* ─── Glass Panel ────────────────────────────────────────────────────────── */
+
+.glass-panel {
+  background: rgba(23, 31, 51, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+}
+
+/* ─── Glow Effects ───────────────────────────────────────────────────────── */
+
+.glow-active {
+  box-shadow: 0 0 30px rgba(214, 186, 255, 0.2);
+}
+
+.glow-hover {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glow-hover:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(214, 186, 255, 0.15);
+}
+
+/* ─── Vibe Bar (Loading Animation) ───────────────────────────────────────── */
+
+.vibe-bar {
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--primary), var(--secondary-container), var(--primary));
+  background-size: 200% 100%;
+  animation: vibePulse 2s linear infinite;
+}
+
+@keyframes vibePulse {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+/* ─── Prompt Input Focus ─────────────────────────────────────────────────── */
+
+.prompt-input-focus {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prompt-input-focus:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 20px rgba(214, 186, 255, 0.15);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────────────── */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--primary);
+  color: var(--on-primary);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(214, 186, 255, 0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  background: transparent;
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-default);
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--primary);
+  background: rgba(214, 186, 255, 0.05);
+}
+
+.btn-ghost:active {
+  transform: scale(0.98);
+}
+
+/* ─── Cards ──────────────────────────────────────────────────────────────── */
+
+.card {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(214, 186, 255, 0.1);
+}
+
+.card.selected {
+  border-color: var(--primary);
+  background: rgba(214, 186, 255, 0.08);
+  box-shadow: 0 0 15px rgba(214, 186, 255, 0.12);
+}
+
+/* ─── Chips ──────────────────────────────────────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--surface-container-high);
+  color: var(--on-surface-variant);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chip.active {
+  background: rgba(214, 186, 255, 0.15);
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ─── Toggle Switch ──────────────────────────────────────────────────────── */
+
+.toggle-track {
+  width: 44px;
+  height: 24px;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-full);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-track.enabled {
+  background: var(--primary-container);
+}
+
+.toggle-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--outline);
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.toggle-track.enabled .toggle-thumb {
+  transform: translateX(20px);
+  background: var(--primary);
+}
+
+/* ─── Step Indicator ─────────────────────────────────────────────────────── */
+
+.step-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--surface-container-highest);
+  border: 2px solid var(--outline-variant);
+  transition: all 0.3s ease;
+}
+
+.step-dot.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(214, 186, 255, 0.4);
+}
+
+.step-dot.completed {
+  background: var(--primary-container);
+  border-color: var(--primary-container);
+}
+
+.step-line {
+  height: 2px;
+  flex: 1;
+  background: var(--outline-variant);
+  transition: background-color 0.3s ease;
+}
+
+.step-line.completed {
+  background: var(--primary-container);
+}
+
+/* ─── Textarea ───────────────────────────────────────────────────────────── */
+
+.prompt-textarea {
+  width: 100%;
+  min-height: 200px;
+  background: transparent;
+  border: none;
+  color: var(--on-surface);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  padding: var(--space-md);
+  resize: vertical;
+  outline: none;
+}
+
+.prompt-textarea::placeholder {
+  color: var(--outline);
+  opacity: 0.5;
+}
+
+/* ─── Range Slider (Technical/Complexity) ────────────────────────────────── */
+
+.slider-container {
+  width: 100%;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+}
+
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.slider-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--surface-container-highest);
+  outline: none;
+  cursor: pointer;
+}
+
+.slider-input::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background: var(--surface-container-highest);
+  border-radius: var(--radius-full);
+}
+
+.slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2px solid var(--on-primary);
+  margin-top: -7px;
+  /* Center thumb vertically */
+  box-shadow: 0 0 10px rgba(214, 186, 255, 0.4);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.slider-input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: var(--secondary-fixed);
+  box-shadow: 0 0 15px rgba(0, 244, 254, 0.6);
+}
+
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+.slider-tick {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--outline);
+}
+
+.slider-tick.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ─── Result Output ──────────────────────────────────────────────────────── */
+
+.result-output {
+  background: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  color: var(--on-surface);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 22px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-container-highest);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline-variant);
+}
+
+/* ─── Utilities ──────────────────────────────────────────────────────────── */
+
+.container-app {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .container-app {
+    padding: var(--space-xl);
+  }
+}
+
+/* ─── Fade-in animation ──────────────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* ─── Chat Workspace Layout ──────────────────────────────────────────────── */
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.chat-message-row {
+  display: flex;
+  width: 100%;
+}
+
+.chat-message-row.user {
+  justify-content: flex-end;
+}
+
+.chat-message-row.assistant {
+  justify-content: flex-start;
+}
+
+.bubble {
+  max-width: 80%;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.bubble-user {
+  background: linear-gradient(135deg, rgba(170, 115, 255, 0.2), rgba(0, 244, 254, 0.1));
+  border: 1px solid rgba(214, 186, 255, 0.3);
+  color: var(--on-surface);
+  border-bottom-right-radius: 2px;
+  box-shadow: 0 0 20px rgba(214, 186, 255, 0.1);
+}
+
+.bubble-assistant {
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface);
+  border-bottom-left-radius: 2px;
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--surface-container-lowest);
+  border-top: 1px solid var(--outline-variant);
+}
+
+.chat-textarea {
+  flex: 1;
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-default);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--on-surface);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 24px;
+  resize: none;
+  height: 48px;
+  max-height: 120px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.chat-textarea:focus {
+  border-color: var(--primary);
+}
+
+/* ─── Typing Indicator ───────────────────────────────────────────────────── */
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-md);
+  border-bottom-left-radius: 2px;
+  width: fit-content;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--outline);
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typingBounce {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* ─── Overlay Dialog (Compiled Prompt Modal) ────────────────────────────── */
+
+.overlay-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(6, 14, 32, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+}
+
+.overlay-container {
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 0 50px rgba(0, 244, 254, 0.15);
+}
